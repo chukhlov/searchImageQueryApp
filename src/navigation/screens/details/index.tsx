@@ -4,7 +4,7 @@ import {useRoute} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../../redux/store';
 import Loader from '../../../components/loader';
-import DetailScreenImage from './image';
+import ProgressiveImage from '../../../components/progressiveImage';
 import Resolutions from './resolutions';
 import DetailScreenUser from './user';
 import DetailScreenTags from './tags';
@@ -29,7 +29,10 @@ const DetailScreen = () => {
     <SafeAreaView style={styles.flex}>
       <ScrollView>
         <View>
-          <DetailScreenImage uri={details.webformatURL} />
+          <ProgressiveImage
+            uri={details.webformatURL}
+            imageStyles={styles.image}
+          />
           <Resolutions
             width={details.imageWidth}
             height={details.imageHeight}

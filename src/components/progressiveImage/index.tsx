@@ -1,13 +1,14 @@
-import React, { FC, useCallback, useMemo, useState } from "react";
-import {Image, View, ActivityIndicator} from 'react-native';
+import React, {FC, useCallback, useMemo, useState} from 'react';
+import {Image, View, ActivityIndicator, ImageStyle} from 'react-native';
+import {showMessage} from 'react-native-flash-message';
 import styles from './styles';
-import { showMessage } from "react-native-flash-message";
 
 type IImageProps = {
   uri: string;
+  imageStyles?: ImageStyle | ImageStyle[];
 };
 
-const DetailScreenImage: FC<IImageProps> = ({uri}) => {
+const ProgressiveImage: FC<IImageProps> = ({uri, imageStyles}) => {
   const [loading, setLoading] = useState(true);
 
   const disableLoader = useCallback(() => {
@@ -36,10 +37,15 @@ const DetailScreenImage: FC<IImageProps> = ({uri}) => {
 
   return (
     <View>
-      <Image source={{uri}} style={styles.image} onLoad={disableLoader} onError={showError} />
+      <Image
+        source={{uri}}
+        style={imageStyles}
+        onLoad={disableLoader}
+        onError={showError}
+      />
       {loader}
     </View>
   );
 };
 
-export default DetailScreenImage;
+export default ProgressiveImage;
